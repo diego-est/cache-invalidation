@@ -123,3 +123,6 @@ Sample grid:
   o o o o o o o o o o
   o o o o o o o o o o
 ```
+
+# Links
+* link to GitHub repo: https://github.com/Sunglas/BattleShip
