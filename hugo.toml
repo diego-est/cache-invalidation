@@ -1,4 +1,4 @@
-baseURL = 'https://sunglas.github.io'
+baseURL = 'https://sunglas.github.io/cache-invalidation'
 languageCode = 'en-us'
 title = 'Cache Invalidation'
 

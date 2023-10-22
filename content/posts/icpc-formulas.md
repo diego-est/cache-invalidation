@@ -1,5 +1,5 @@
 +++
-title = 'ICPC formulas and shortcuts'
+title = 'ICPC Formulas and Shortcuts'
 date = 2023-10-08T21:25:27-04:00
 draft = false
 +++
