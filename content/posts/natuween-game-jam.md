@@ -1,5 +1,7 @@
 +++
 title = 'Big Bold Title'
-date = 20YY-MM-DDT00:00:00-04:00
+date = 2023-08-22T10:00:00-04:00
 draft = true
 +++
+
+probably in TIC80???
