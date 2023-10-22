@@ -1,6 +1,6 @@
 +++
 title = 'Mandelbrot Parallelized'
-date = 2023-08-22T15:54:55-04:00
+date = 2023-10-22T15:54:55-04:00
 draft = false
 +++
 

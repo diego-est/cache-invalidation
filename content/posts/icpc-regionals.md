@@ -1,6 +1,6 @@
 +++
 title = 'We Lost the ICPC Regionals'
-date = 2023-08-21T22:00:00-04:00
+date = 2023-10-21T22:00:00-04:00
 draft = false
 +++
 
