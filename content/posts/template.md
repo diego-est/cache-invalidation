@@ -1,5 +1,5 @@
 +++
 title = 'Big Bold Title'
-date = 20YY-MM-DDT00:00:00-04:00
+date = 2023-01-01T00:00:00-04:00
 draft = true
 +++
