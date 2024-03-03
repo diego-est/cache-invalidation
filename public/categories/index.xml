@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on Cache Invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/categories/</link>
+        <description>Recent content in Categories on Cache Invalidation</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 01 Jan 2024 00:00:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/cache-invalidation/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Competitive Programming</title>
+        <link>http://localhost:1313/cache-invalidation/categories/competitive-programming/</link>
+        <pubDate>Mon, 01 Jan 2024 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/competitive-programming/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>String Parsing</title>
+        <link>http://localhost:1313/cache-invalidation/categories/string-parsing/</link>
+        <pubDate>Mon, 01 Jan 2024 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/string-parsing/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Frontend</title>
+        <link>http://localhost:1313/cache-invalidation/categories/frontend/</link>
+        <pubDate>Sun, 22 Oct 2023 10:35:14 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/frontend/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Math</title>
+        <link>http://localhost:1313/cache-invalidation/categories/math/</link>
+        <pubDate>Sat, 21 Oct 2023 22:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/math/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Matrix</title>
+        <link>http://localhost:1313/cache-invalidation/categories/matrix/</link>
+        <pubDate>Wed, 04 Oct 2023 10:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/matrix/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Mandelbrot</title>
+        <link>http://localhost:1313/cache-invalidation/categories/mandelbrot/</link>
+        <pubDate>Fri, 05 May 2023 11:08:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/mandelbrot/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Dots</title>
+        <link>http://localhost:1313/cache-invalidation/categories/dots/</link>
+        <pubDate>Fri, 31 Mar 2023 13:48:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/dots/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Xorg</title>
+        <link>http://localhost:1313/cache-invalidation/categories/xorg/</link>
+        <pubDate>Fri, 31 Mar 2023 13:32:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/xorg/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Category Theory</title>
+        <link>http://localhost:1313/cache-invalidation/categories/category-theory/</link>
+        <pubDate>Thu, 12 Jan 2023 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/category-theory/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Code Design</title>
+        <link>http://localhost:1313/cache-invalidation/categories/code-design/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/code-design/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Web</title>
+        <link>http://localhost:1313/cache-invalidation/categories/web/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/categories/web/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

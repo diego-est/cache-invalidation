@@ -2,4 +2,4 @@ baseURL = 'https://sunglas.github.io/cache-invalidation'
 languageCode = 'en-us'
 title = 'Cache Invalidation'
 
-theme = 'holy'
+theme = 'hugo-theme-stack'

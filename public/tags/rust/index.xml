@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Rust on Cache Invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/tags/rust/</link>
+        <description>Recent content in Rust on Cache Invalidation</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 31 Mar 2023 13:32:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/cache-invalidation/tags/rust/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>R. O. N. DataBase Manager</title>
+        <link>http://localhost:1313/cache-invalidation/posts/ron-db/</link>
+        <pubDate>Fri, 31 Mar 2023 13:32:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/ron-db/</guid>
+        <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;strong&gt;rdbm&lt;/strong&gt; is a rust program for getting and setting a custom ron resource file.&lt;/p&gt;
+&lt;p&gt;Similar to &lt;code&gt;.Xresources&lt;/code&gt;, &lt;code&gt;rdbm&lt;/code&gt; will create a &lt;code&gt;resources.ron&lt;/code&gt; in your &lt;code&gt;~/.config/&lt;/code&gt; directory.
+You can then use &lt;code&gt;rdbm&lt;/code&gt; to set multiple &amp;ldquo;key-value&amp;rdquo; pairs similar to &lt;code&gt;.Xresources&lt;/code&gt;.
+In this case &lt;code&gt;rdbm&lt;/code&gt; aims to replace &lt;code&gt;xrdb&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/ron-rs/ron&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ron Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wikipedia.org/wiki/Xrdb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;xrdb Information&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;documentation&#34;&gt;Documentation&lt;/h1&gt;
+&lt;p&gt;Here is a short preview of each subcommand:&lt;/p&gt;
+&lt;h2 id=&#34;view-current-resource-file&#34;&gt;view current resource file&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm all
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;set-a-key-value-pair&#34;&gt;set a key-value pair&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm set &amp;#34;color0&amp;#34; &amp;#34;#222F30&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;get-a-value&#34;&gt;get a value&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm get &amp;#34;color0&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;rdbm-help-page&#34;&gt;rdbm help page&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm --help
+rdbm help
+rdbm set --help
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;project-goals&#34;&gt;Project Goals&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove entries&lt;/li&gt;
+&lt;li&gt;Get/Set multiple values&lt;/li&gt;
+&lt;li&gt;Custom &lt;code&gt;resource.ron&lt;/code&gt; path&lt;/li&gt;
+&lt;li&gt;Group key-value pairs (similar to having &lt;code&gt;URxvt*color0&lt;/code&gt; and &lt;code&gt;xterm*color0&lt;/code&gt; in .Xresources)&lt;/li&gt;
+&lt;li&gt;Sort entries in resource file&lt;/li&gt;
+&lt;li&gt;Preserve order of entries in resource file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Link to github repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/rdbm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/rdbm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

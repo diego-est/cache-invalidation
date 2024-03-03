@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>HTML on Cache Invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/tags/html/</link>
+        <description>Recent content in HTML on Cache Invalidation</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 22 Oct 2023 10:35:14 -0400</lastBuildDate><atom:link href="http://localhost:1313/cache-invalidation/tags/html/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Asian Culture Festival Website</title>
+        <link>http://localhost:1313/cache-invalidation/posts/asian-culture-festival/</link>
+        <pubDate>Sun, 22 Oct 2023 10:35:14 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/asian-culture-festival/</guid>
+        <description>&lt;img src="http://localhost:1313/cache-invalidation/posts/asian-culture-festival/cover.jpg" alt="Featured image of post Asian Culture Festival Website" /&gt;&lt;p&gt;The UPR-RP Asian Culture Festival is happening in 2 weeks from now.
+All of us are finishing our preparations and starting our last finishing
+practices for it.
+One thing I noticed was that most of the pictures from last year were buried in
+an instagram blogpost from last year.
+Which is somewhat unfortunate since lots of beautiful pictures and moments were
+created from that time.&lt;/p&gt;
+&lt;p&gt;What a better way to revive those memories and instill excitement in others than
+with an online gallery of the Festival.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;Asian Culture Festival&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>New Website cache-invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/posts/cache-invalidation/</link>
+        <pubDate>Thu, 28 Sep 2023 10:31:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/cache-invalidation/</guid>
+        <description>&lt;h1 id=&#34;new-website&#34;&gt;New website&lt;/h1&gt;
+&lt;p&gt;In the past I had tried making several different websites to organize different
+singular projects but I quickly realized that was way too much work for whatever
+those projects were. Most of my projects aren&amp;rsquo;t finished because I lose the
+motivation to do so. Nevertheless, my motivation to start projects is enough to
+get them to a fully working state.&lt;/p&gt;
+&lt;p&gt;I made this so I could organize all my different projects in a single place in
+an easy way. Most of my projects were distributed around my github profile into
+different repos.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s to seeing if any new projects will spring up because of this.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Link to GitHub repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/cache-invalidation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/cache-invalidation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

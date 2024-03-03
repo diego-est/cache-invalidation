@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Unix Ricing on Cache Invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/tags/unix-ricing/</link>
+        <description>Recent content in Unix Ricing on Cache Invalidation</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 31 Mar 2023 13:48:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/cache-invalidation/tags/unix-ricing/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Wayland Laptop Dotfiles</title>
+        <link>http://localhost:1313/cache-invalidation/posts/wl-lp-dots/</link>
+        <pubDate>Fri, 31 Mar 2023 13:48:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/wl-lp-dots/</guid>
+        <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src=&#34;https://media.discordapp.net/attachments/635625917623828520/1085283400610488442/rice_comp.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The Rice&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;colors&#34;&gt;Colors&lt;/h2&gt;
+&lt;p&gt;I used &lt;code&gt;pywal&lt;/code&gt; to generate this colorscheme, feel free to do the same.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/dylanaraps/pywal&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;pywal GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Black:   #222F30
+Grey:    #A59D9C
+Red:     #86999B
+Green:   #86A78F
+Yellow:  #8592A5
+Blue:    #87B0AF
+Magenta: #B0A7A9
+Cyan:    #DCBCB6
+White:   #EDE1E0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;fetch-program&#34;&gt;fetch program&lt;/h2&gt;
+&lt;p&gt;Provided is a rust crate called &lt;code&gt;fetch&lt;/code&gt; with a basic template to make a hard-coded fetch program.
+(That&amp;rsquo;s the one I used for the screenshots.)
+The program displays:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+  UserName@HostName
+  Distro  ~ DistroName
+  Shell   ~ ShellName
+  Term    ~ Terminal
+  WM      ~ WindowManager
+  ▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So simply modify the variables in the source file to fit your setup and &lt;code&gt;cargo build --release&lt;/code&gt; to get the binary.
+(Tip: I copied the binary over to &lt;code&gt;./local/bin/&lt;/code&gt;.)&lt;/p&gt;
+&lt;h2 id=&#34;assets&#34;&gt;Assets&lt;/h2&gt;
+&lt;h3 id=&#34;firefox-startpage&#34;&gt;Firefox startpage&lt;/h3&gt;
+&lt;p&gt;eject by Spogelsesmaskinen.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/spogelsemaskine/status/1607752472331689991&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;eject&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/spogelsemaskine&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Spogelsesmankinen Twitter profile&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wallpaper&#34;&gt;Wallpaper&lt;/h3&gt;
+&lt;p&gt;Could not find the original artist for the background but I found this wallhaven post with a pretty high res version saved.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://whvn.cc/yxqj6l&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://whvn.cc/yxqj6l&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;firefox-startpage-1&#34;&gt;firefox startpage&lt;/h2&gt;
+&lt;h3 id=&#34;startpage&#34;&gt;Startpage&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;WARNING:&lt;/strong&gt;&lt;/em&gt; &lt;em&gt;&lt;strong&gt;do not&lt;/strong&gt; apply this without considering the vulnerabilities it opens up.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mozilla.org/en-US/security/advisories/mfsa2019-21/#CVE-2019-11730&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;See this CVE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I copied most of what&amp;rsquo;s in this:
+(I added the lil&amp;rsquo; gif at the side and changed some of the website links.)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/okitavera/vimstart&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/okitavera/vimstart&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In order to have this work you will have to let firefox to be able to view &lt;code&gt;file://&lt;/code&gt; from within a locally hosted html file.
+I&amp;rsquo;m guessing you could get around having to disable these security policies by locally hosting the html but I&amp;rsquo;m not quite there yet&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Provided is a user.js inside &lt;code&gt;.mozilla/firefox/default-release&lt;/code&gt; with the necessary changes to make.
+More specifically, these three lines (as documented in mozillazine):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;user_pref&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capability.policy.policynames&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localfilelinks&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;user_pref&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capability.policy.localfilelinks.sites&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file://&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;user_pref&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capability.policy.localfilelinks.checkloaduri.enabled&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;allAccess&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://kb.mozillazine.org/Links_to_local_pages_do_not_work&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;mozillazine&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, if you are running the latest version of firefox (hopefully):
+Toggle &lt;code&gt;security.fileuri.strict_origin_policy&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; in your &lt;code&gt;about:config&lt;/code&gt; page.&lt;/p&gt;
+&lt;h3 id=&#34;other-firefox-css-tweaks&#34;&gt;Other Firefox css tweaks&lt;/h3&gt;
+&lt;p&gt;I copied &lt;code&gt;color_variable_template&lt;/code&gt; and &lt;code&gt;autohide_tabstoolbar&lt;/code&gt; templates from this incredible firefox css website:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mrotherguy.github.io/firefox-csshacks/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://mrotherguy.github.io/firefox-csshacks/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;code&gt;userChrome.css&lt;/code&gt; provided under &lt;code&gt;.mozilla/firefox/default-release/chrome&lt;/code&gt; already has these css patches applied and should be placed inside the &lt;code&gt;chrome&lt;/code&gt; directory that &lt;em&gt;you&lt;/em&gt; have to make inside your firefox local directory.
+Your firefox local directory can be found in &lt;code&gt;about:profiles&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;vim&#34;&gt;Vim&lt;/h2&gt;
+&lt;p&gt;I did not theme much of what&amp;rsquo;s on my vim other than enabling a couple options.
+Most of it (but basically all of it) comes from the amazing team over at AstroNvim .
+Additionally, my nvim version is &lt;code&gt;0.8.0&lt;/code&gt; and was installed through bob-nvim.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/AstroNvim/AstroNvim&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AstroNvim GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://crates.io/crates/bob-nvim&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bob-nvim&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;shell&#34;&gt;shell&lt;/h2&gt;
+&lt;p&gt;As seen in my screenshot I am using nushell.
+A new type of shell that deals with data instead of simple text streams.
+Very interesting and fast out of the box (even on my 2008 hardware).
+&lt;strong&gt;NOTE&lt;/strong&gt; I have a bunch of aliases at the end of my nushell config file that replace most of the gnu coreutils with rust implementations of each.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nushell.sh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;nushell Website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/uutils/coreutils&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;UUtils GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sway&#34;&gt;Sway&lt;/h2&gt;
+&lt;h3 id=&#34;i-am-not-using-the-upstream-sway&#34;&gt;I am not using the upstream sway.&lt;/h3&gt;
+&lt;p&gt;I am using swayfx.
+A fork of sway that adds corners, shadows and active/inactive dim.
+That means that the options under the swayfx area in my sway config will most definitely give you errors when launching the upstream sway istead of swayfx sway.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/WillPower3309/swayfx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;swayfx GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dvorak&#34;&gt;dvorak&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;IMPORTANT&lt;/strong&gt;&lt;/em&gt;
+My keybinds and input layout in sway are set to a dvorak keyboard.
+So if you are using a normal qwerty keyboard remember to change the layout back to normal in the sway config and possibly change the sway keybinds around in the keymap config.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Link to github repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/laptop-dots-wl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/laptop-dots-wl&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

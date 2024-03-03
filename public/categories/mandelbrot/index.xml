@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Mandelbrot on Cache Invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/categories/mandelbrot/</link>
+        <description>Recent content in Mandelbrot on Cache Invalidation</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 05 May 2023 11:08:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/cache-invalidation/categories/mandelbrot/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mandelbrot Research Repo</title>
+        <link>http://localhost:1313/cache-invalidation/posts/mandelbrot/</link>
+        <pubDate>Fri, 05 May 2023 11:08:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/mandelbrot/</guid>
+        <description>&lt;p&gt;Mandelbrot fractal research repo&lt;/p&gt;
+&lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve refactored this piece of code like 6140275936420759697 times so here&amp;rsquo;s the collection of all those efforts.&lt;/p&gt;
+&lt;h2 id=&#34;how&#34;&gt;How?&lt;/h2&gt;
+&lt;p&gt;The C directory has everything you need for a 100% portable version to generate on whatever piece of hardware you want.
+nobuild courtesy of tsoding at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/tsoding/nobuild&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;nobuild&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The c++ directory has three sub directories.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mandelbrot/&lt;/code&gt; has my first c port from:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=6z7GQewK-Ks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;The Coding Train&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;mandelbrot-gamma/&lt;/code&gt; using openmp for multithreading; a very optimized version of that same code&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mandelbrot-lambda/&lt;/code&gt; is in the works but it&amp;rsquo;s supposed to be the same as mandelbrot-gamma but using lambdas&lt;/p&gt;
+&lt;h2 id=&#34;here-it-is&#34;&gt;Here it is:&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/Sunglas/mandelbrot/blob/main/mandelbrot.png?raw=true&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;4K mandelbrot image&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;todo&#34;&gt;TODO():&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;- histogram
+- fancy colors
+- specify spot to generate in
+- maybe animate ??
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;* Link to github repo: https://github.com/Sunglas/mandelbrot
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>Mandelbrot Parallelized</title>
+        <link>http://localhost:1313/cache-invalidation/posts/mandelbrot-revamp/</link>
+        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/mandelbrot-revamp/</guid>
+        <description>&lt;img src="http://localhost:1313/cache-invalidation/posts/mandelbrot-revamp/cover.png" alt="Featured image of post Mandelbrot Parallelized" /&gt;&lt;p&gt;As I had mentioned in my past blog about the &lt;a class=&#34;link&#34; href=&#34;mandelbrot.md&#34; &gt;&lt;em&gt;Mandelbrot Research
+Repo&lt;/em&gt;&lt;/a&gt; &amp;ldquo;I&amp;rsquo;ve refactored this piece of code like
+6140275936420759697 times&amp;hellip;&amp;rdquo;, so I guess that makes it &amp;ldquo;6140275936420759697&amp;rdquo;
+plus one.&lt;/p&gt;
+&lt;p&gt;This time around I finalized the implementation for a &lt;code&gt;Canvas&lt;/code&gt; class that
+collects all the pixels you want and writes to a file you give it.
+By making it a class it is now much easier to work on the underlying byte buffer
+without having to get your hands dirty.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;size_t width, size_t height&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Canvas&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The only downside to this implementation is the fact that this class will get
+allocated on the stack so for any render of 1.5k+ pixels in both dimensions ends
+up overflowing most computer&amp;rsquo;s stacks nowadays.
+The way to get around this is by declaring the canvas object as a &lt;code&gt;static&lt;/code&gt;
+duration object so that it gets stored into storage and not the actual stack.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; canvas &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Canvas&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One cool thing about this implementation is the way you can use lambdas to
+modify the pixels isnide the byte buffer.
+For example, with the new &lt;code&gt;construct(auto op)&lt;/code&gt; method you can simply pass a
+function pointer (though realistically, you would only pass a lambda) and the
+&lt;code&gt;construct&lt;/code&gt; method applies that function to each pixel in the canvas.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; mandelbrot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [](std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;complex&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; coordinate) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; max_iteration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20000ul&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; x_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; y_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; iteration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0u&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;islessequal((x_squared &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y_squared), &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		       (iteration &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; max_iteration)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fma(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x, y, coordinate.imag());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x_squared &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y_squared &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; coordinate.real();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			x_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			y_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			iteration&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Color&lt;/span&gt;(iteration);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	canvas.construct(mandelbrot);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This can then be parallelized using &lt;a class=&#34;link&#34; href=&#34;https://openmp.org/specifications/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OpenMP&lt;/a&gt;
+with a range-based for-loop.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;construct&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; op) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#pragma omp parallel for
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (size_t idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; idx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; width &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; height; idx&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			pixels[idx] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; op(coordinate(idx));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One final fix that&amp;rsquo;s pending is being able to do histogram coloring.
+This can (probably) be easily implemented by just changing the &lt;code&gt;return Color(iteration)&lt;/code&gt; part at the end of that lambda.
+But I haven&amp;rsquo;t found a convenient way of doing that yet.
+Furthermore, it would be good to support different scaled images.
+The rendered image for this implementation breaks if &lt;code&gt;width != height&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/mandelbrot/tree/main/c%2B%2B/mandelbrot-gamma&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;mandelbrot gamma implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

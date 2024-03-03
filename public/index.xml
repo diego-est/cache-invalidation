@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Cache Invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/</link>
+        <description>Recent content on Cache Invalidation</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 01 Jan 2024 00:00:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/cache-invalidation/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Advent of Code 2023</title>
+        <link>http://localhost:1313/cache-invalidation/posts/advent-of-code/</link>
+        <pubDate>Mon, 01 Jan 2024 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/advent-of-code/</guid>
+        <description>&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;
+&lt;p&gt;This year&amp;rsquo;s advent of code was interesting. I decided this was the year I would
+start learning Haskell, since I had gotten my hands on the &amp;ldquo;Category theory for Programmers&amp;rdquo;
+book by Bartosz Milewski. Not withstanding, this year featured an entire week of
+string parsing and manipulation. Because of this, this year has to be one of the
+most tedious advent of code years yet.&lt;/p&gt;
+&lt;p&gt;I had just gotten my hands on &amp;ldquo;Category Theory for Programmers&amp;rdquo; by Bartosz
+Milewski. This book is phenomenal! It introduces category theory concepts in a
+very digestible way. One of the category theory concepts that the book exposes
+is function composition. One way to compose functions is using function
+combinators, for example the famous &lt;a class=&#34;link&#34; href=&#34;https://www.angelfire.com/tx4/cus/combinator/birds.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;combinator birds&lt;/a&gt;.
+These combinator birds express different ways of composing functions using a
+single function. Which lets you build your own custom complex algorithm by
+merely picking and choosing which functions you want to use.&lt;/p&gt;
+&lt;h1 id=&#34;day-1&#34;&gt;Day 1&lt;/h1&gt;
+&lt;p&gt;Day one started with string parsing. They give you an input that has both number
+words and digits and you have to pick the first digit that appears from both the
+right and the first from the left.&lt;/p&gt;
+&lt;p&gt;My solution to the first part was the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Data.List
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Data.Char
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;toInt&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;starling&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;a b c d &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; a (b d) (c d)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;toList&lt;/span&gt; x1 x2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x1, x2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getNum&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; starling toList head last &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; filter isDigit
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;solve1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; map (toInt &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; getNum)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; interact &lt;span style=&#34;color:#f92672&#34;&gt;$&lt;/span&gt; show &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; solve1 &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; words
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This solution was somewhat concise. You have the starling combinator, which
+admittedly is not descriptive and a very bad name, which you use to combine the
+head and last of the digits in the input.&lt;/p&gt;
+&lt;p&gt;The second part was not as simple. The second part asks that you parse each word
+and find what the first and what the last possibly digit or word number is.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for example: &lt;code&gt;twoeight3&lt;/code&gt; would be &amp;ldquo;283&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Data.List
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; Data.Char
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;toInt&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; read &lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;starling&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;\&lt;/span&gt;a b c d &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; a (b d) (c d)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;one&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;two&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;three&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;four&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;five&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;six&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;seven&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;eight&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nine&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;7&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;9&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitAll&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;splitAll&lt;/span&gt; (x&lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt;xs) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [x] &lt;span style=&#34;color:#66d9ef&#34;&gt;:&lt;/span&gt; splitAll xs
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;prefixes&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; scanl1 (&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; splitAll
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;suffixes&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; scanr1 (&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; splitAll
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;allSubstrs&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; foldl&amp;#39; (&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; map (suffixes) &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; prefixes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getNum&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; starling (&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) head last &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; filter (&lt;span style=&#34;color:#f92672&#34;&gt;/=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; map number &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; allSubstrs
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;solve2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; map (toInt &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; getNum)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; interact &lt;span style=&#34;color:#f92672&#34;&gt;$&lt;/span&gt; show &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; solve2 &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; words
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;That&amp;rsquo;s a lot to digest.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Asian Culture Festival Website</title>
+        <link>http://localhost:1313/cache-invalidation/posts/asian-culture-festival/</link>
+        <pubDate>Sun, 22 Oct 2023 10:35:14 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/asian-culture-festival/</guid>
+        <description>&lt;img src="http://localhost:1313/cache-invalidation/posts/asian-culture-festival/cover.jpg" alt="Featured image of post Asian Culture Festival Website" /&gt;&lt;p&gt;The UPR-RP Asian Culture Festival is happening in 2 weeks from now.
+All of us are finishing our preparations and starting our last finishing
+practices for it.
+One thing I noticed was that most of the pictures from last year were buried in
+an instagram blogpost from last year.
+Which is somewhat unfortunate since lots of beautiful pictures and moments were
+created from that time.&lt;/p&gt;
+&lt;p&gt;What a better way to revive those memories and instill excitement in others than
+with an online gallery of the Festival.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;Asian Culture Festival&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>We Lost the ICPC Regionals</title>
+        <link>http://localhost:1313/cache-invalidation/posts/icpc-regionals-l/</link>
+        <pubDate>Sat, 21 Oct 2023 22:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/icpc-regionals-l/</guid>
+        <description>&lt;img src="http://localhost:1313/cache-invalidation/posts/icpc-regionals-l/cover.jpg" alt="Featured image of post We Lost the ICPC Regionals" /&gt;&lt;p&gt;After a grueling five hour match our team couldn&amp;rsquo;t solve a single exercise.
+We were very out of it at the end and just couldn&amp;rsquo;t find a way to solve any of
+the exercises.
+Even though the exercises were pretty hard some of our solutions were indeed
+correct but couldn&amp;rsquo;t beat the time limit they gave us for those exercises.&lt;/p&gt;
+&lt;p&gt;For example one of the exercises was to find out all the numbers between 2 and N
+that fit the following description:
+For x in [2, N], N base x is a palindrome.
+The complicated part of this problem being the fact that the largest N they give
+you is 2^15 and your time limit is 1 second.&lt;/p&gt;
+&lt;p&gt;Changing a decimal number to a different base will always take an &lt;code&gt;O(log n)&lt;/code&gt;
+amount of steps; checking if it&amp;rsquo;s a palindrome will take &lt;code&gt;O(n/2)&lt;/code&gt; steps max;
+doing that for every number in [2, N] is &lt;code&gt;O(n log(n))&lt;/code&gt;.
+Note that an average computer can only do 10^8 calculations per second, but our
+largest number is 2^15 which means that anything equal or slower in complexity
+than a linear solution would be too slow.&lt;/p&gt;
+&lt;p&gt;During the competition several things we noticed were that N in [3, N) will
+always have at least 1 palindrome in the base N-1.
+That is because you can always express N as (1 * (N-1) + 1).
+The next palindrome number would be 22 but wwe couldn&amp;rsquo;t notice why this
+palindrome would only sometimes appear.&lt;/p&gt;
+&lt;p&gt;For the sake of explanation I will refer to &lt;code&gt;palindrome-pairs&lt;/code&gt; as a palindrome
+made of 2 digits.
+After the competition concluded, on the ride back, our professor had mentioned
+that you will always have palindrome-pairs made of the factors of that number
+strictly less than that number&amp;rsquo;s square root.
+Which makes sense for our first example since every number has the number 1 as a
+factor.
+Furthermore, the number 36, whose factors are: { 1, 2, 3, 4, 6, 9, 18, 36 } can
+be expressed as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;11 in base 35&lt;/li&gt;
+&lt;li&gt;22 in base 17&lt;/li&gt;
+&lt;li&gt;33 in base 11&lt;/li&gt;
+&lt;li&gt;44 in base 8&lt;/li&gt;
+&lt;li&gt;121 in base 6 awwww
+It was almost working.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I say almost because 121 IS a palindrome but it&amp;rsquo;s also not a palindrome-pair.
+Unfortunately we couldn&amp;rsquo;t come up with any better algorithm for this and ended
+up submitting this solution twice and getting TLE&amp;rsquo;d.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ICPC Formulas and Shortcuts</title>
+        <link>http://localhost:1313/cache-invalidation/posts/icpc-formulas/</link>
+        <pubDate>Sun, 08 Oct 2023 21:25:27 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/icpc-formulas/</guid>
+        <description>&lt;h1 id=&#34;code-templates&#34;&gt;Code templates&lt;/h1&gt;
+&lt;p&gt;Here are several code templates that will probably have to be typed out for
+every exercise.&lt;/p&gt;
+&lt;h2 id=&#34;c&#34;&gt;C++&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;bits/stdc++.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#define fastIO ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#define all(x) x.begin(), x.end()
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#define int int64_t
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; size_t sz;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; pair&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; ii;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; vi;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;pair&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; vii;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;vector&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; vvi;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int32_t&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    fastIO;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;/* solution */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;formulas&#34;&gt;Formulas&lt;/h1&gt;
+&lt;p&gt;These code templates are based off the previous C++ code header.&lt;/p&gt;
+&lt;h2 id=&#34;matrices&#34;&gt;Matrices&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;matrix.md&#34; &gt;Matrices&lt;/a&gt; are very useful for recurrence relations.&lt;/p&gt;
+&lt;h1 id=&#34;longest-common-subsequence&#34;&gt;Longest common subsequence&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; lcs(T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; seq1, T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; seq2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; seq1.size();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; seq2.size();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	vi &lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt;(m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;), cur(m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (seq1[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; seq2[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				cur[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; prev[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				cur[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max(cur[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;], prev[j]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		prev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cur;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; cur[m];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;longest-increasing-subsequence&#34;&gt;Longest Increasing Subsequence&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typename&lt;/span&gt; T&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; lis(vi arr)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; vi.size();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	vi ans;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	ans.push_back(nums[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (nims[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; ans.back())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			ans.push_back(nums[i]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lower_bound(all(ans), nums[i]) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; ans.begin();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			ans[low] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; nums[i];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ans.size();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Matrix C&#43;&#43; Container</title>
+        <link>http://localhost:1313/cache-invalidation/posts/cpp-matrix/</link>
+        <pubDate>Wed, 04 Oct 2023 10:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/cpp-matrix/</guid>
+        <description>&lt;p&gt;Following last week&amp;rsquo;s ICPC contest I spent all week trying to make a C++ matrix
+class template we could use for the commpetitions.&lt;/p&gt;
+&lt;p&gt;The problem was a very basic fibonacci-like recurrence relation of the form:
+&lt;code&gt;f(n) = f(n-1) + f(n-2) + 2 * n * n + 5&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The main issue with this was the fact that the largest input size was 10^18.
+Computers on average (mildly lower than average nowadays) can do around 10^8
+cycles per second.
+Which left us with an estimate ~10^10 seconds left to compute the largest
+fibonacci number&amp;hellip;
+Though that may be impossible there is an algorithm to compute any recurrence
+relation in big-O log time.
+I will not go into detail on how to do that (though I might just make another
+blog post about it), &lt;a class=&#34;link&#34; href=&#34;https://comeoncodeon.wordpress.com/2011/05/08/recurrence-relation-and-matrix-exponentiation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here is a link to an amazing article&lt;/a&gt;
+on how to create a fibonacci matrix based on any recurrence relation.&lt;/p&gt;
+&lt;p&gt;Code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Matrix&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Matrix(sz r, sz c) &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; data(vi(r &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; c, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)), cols(c), rows(r)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;[](sz i)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; data[i];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;()(sz r, sz c)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; data[r &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; cols &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; c];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;operator&lt;/span&gt;()(sz r, sz c) &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; data[r &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; cols &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; c];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	vi &lt;span style=&#34;color:#a6e22e&#34;&gt;get_row&lt;/span&gt;(sz r) &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; vi(cols, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		sz i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; e : ret) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			e &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data[rows &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; r &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; i];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	vi &lt;span style=&#34;color:#a6e22e&#34;&gt;get_col&lt;/span&gt;(sz c) &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; vi(rows, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		sz i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; e : ret) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			e &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; data[cols &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; c];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ret;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;print&lt;/span&gt;() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (sz i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; rows; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (sz j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; cols; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;)(i, j) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			cout &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; endl;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Matrix &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Matrix&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; rhs) &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Matrix(rhs.rows, cols);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (sz i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; cols; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; sel_row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_row(i);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (sz j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; rhs.rows; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; sel_col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; rhs.get_col(j);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; sum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; inner_product(sel_row.begin(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;							sel_row.end(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;							sel_col.begin(), &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				out(i, j) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; out;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;operator&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*=&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; Matrix&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; rhs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (sz i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; cols; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; sel_row &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_row(i);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (sz j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; rhs.rows; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; sel_col &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; rhs.get_col(j);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; sum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; inner_product(sel_row.begin(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;							sel_row.end(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;							sel_col.begin(), &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;				(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;)(i, j) &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sum;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	vi data;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	sz cols;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	sz rows;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Here is a link to the matrix github repo:&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>New Website cache-invalidation</title>
+        <link>http://localhost:1313/cache-invalidation/posts/cache-invalidation/</link>
+        <pubDate>Thu, 28 Sep 2023 10:31:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/cache-invalidation/</guid>
+        <description>&lt;h1 id=&#34;new-website&#34;&gt;New website&lt;/h1&gt;
+&lt;p&gt;In the past I had tried making several different websites to organize different
+singular projects but I quickly realized that was way too much work for whatever
+those projects were. Most of my projects aren&amp;rsquo;t finished because I lose the
+motivation to do so. Nevertheless, my motivation to start projects is enough to
+get them to a fully working state.&lt;/p&gt;
+&lt;p&gt;I made this so I could organize all my different projects in a single place in
+an easy way. Most of my projects were distributed around my github profile into
+different repos.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s to seeing if any new projects will spring up because of this.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Link to GitHub repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/cache-invalidation&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/cache-invalidation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>BattleShip</title>
+        <link>http://localhost:1313/cache-invalidation/posts/battleship/</link>
+        <pubDate>Sat, 12 Aug 2023 16:38:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/battleship/</guid>
+        <description>&lt;h2 id=&#34;classes&#34;&gt;Classes&lt;/h2&gt;
+&lt;h3 id=&#34;graphic&#34;&gt;&lt;code&gt;Graphic&lt;/code&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Purpose:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Hold all the required information needed to display a simple graphic on the screen.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Public Methods:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Value returning:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[[nodiscard]] auto get_win() const -&amp;gt; WINDOW *&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[[nodiscard]] auto get_text() const -&amp;gt; std::vector&amp;lt;const char *&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[[nodiscard]] auto get_attributes() const -&amp;gt; std::vector&amp;lt;unsigned int&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[[nodiscard]] auto get_coords() const -&amp;gt; std::pair&amp;lt;size_t, size_t&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Void:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;auto show() const -&amp;gt; void&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;auto set_win(WINDOW *) -&amp;gt; void&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;auto set_text(std::span&amp;lt;const char *&amp;gt;) -&amp;gt; void&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;auto set_text(std::initializer_list&amp;lt;unsigned int&amp;gt;) -&amp;gt; void&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ship--graphic&#34;&gt;&lt;code&gt;Ship : Graphic&lt;/code&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Purpose:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Hold extra information needed to display an entire ship entity.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Public Methods:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Value returning:&lt;/li&gt;
+&lt;li&gt;Void:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;player&#34;&gt;&lt;code&gt;Player&lt;/code&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Purpose:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Hold and manage information pertaining to a specific player.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Public Methods:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Value returning:&lt;/li&gt;
+&lt;li&gt;Void:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;assets&#34;&gt;Assets&lt;/h2&gt;
+&lt;p&gt;Logo:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; _               __        
+|_) _._|__|_| _ (_ |_ o._  
+|_)(_| |_ |_|(/___)| |||_) 
+                       |   
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.hasbro.com/common/instruct/BattleShip_%282002%29.PDF&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hasbro instructions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Sample grid:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;ships&#34;&gt;Ships&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Carrier: 5&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  [XXXXXXX] o o o o M
+  o o o o o o o o o X
+  o o o o o o o o o X
+  o o o o o o o o o X
+  o o o o o o o o o W
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Battleship: 4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  &amp;lt;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;gt; o o o o o A
+  o o o o o o o o o &amp;amp;
+  o o o o o o o o o &amp;amp;
+  o o o o o o o o o V
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Destroyer: 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  [===&amp;gt; o o o o o o M
+  o o o o o o o o o H
+  o o o o o o o o o V
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Submarine: 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  (@) o o o o o o o n
+  o o o o o o o o o U
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Patrol Boat: 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  {:} o o o o o o o ^
+  o o o o o o o o o V
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+  o o o o o o o o o o
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;link to GitHub repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/BattleShip&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/BattleShip&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Mandelbrot Research Repo</title>
+        <link>http://localhost:1313/cache-invalidation/posts/mandelbrot/</link>
+        <pubDate>Fri, 05 May 2023 11:08:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/mandelbrot/</guid>
+        <description>&lt;p&gt;Mandelbrot fractal research repo&lt;/p&gt;
+&lt;h2 id=&#34;why&#34;&gt;Why?&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve refactored this piece of code like 6140275936420759697 times so here&amp;rsquo;s the collection of all those efforts.&lt;/p&gt;
+&lt;h2 id=&#34;how&#34;&gt;How?&lt;/h2&gt;
+&lt;p&gt;The C directory has everything you need for a 100% portable version to generate on whatever piece of hardware you want.
+nobuild courtesy of tsoding at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/tsoding/nobuild&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;nobuild&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The c++ directory has three sub directories.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mandelbrot/&lt;/code&gt; has my first c port from:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=6z7GQewK-Ks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;The Coding Train&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;mandelbrot-gamma/&lt;/code&gt; using openmp for multithreading; a very optimized version of that same code&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mandelbrot-lambda/&lt;/code&gt; is in the works but it&amp;rsquo;s supposed to be the same as mandelbrot-gamma but using lambdas&lt;/p&gt;
+&lt;h2 id=&#34;here-it-is&#34;&gt;Here it is:&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/Sunglas/mandelbrot/blob/main/mandelbrot.png?raw=true&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;4K mandelbrot image&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;todo&#34;&gt;TODO():&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;- histogram
+- fancy colors
+- specify spot to generate in
+- maybe animate ??
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;* Link to github repo: https://github.com/Sunglas/mandelbrot
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        </item>
+        <item>
+        <title>Wayland Laptop Dotfiles</title>
+        <link>http://localhost:1313/cache-invalidation/posts/wl-lp-dots/</link>
+        <pubDate>Fri, 31 Mar 2023 13:48:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/wl-lp-dots/</guid>
+        <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;em&gt;I accidentally deleted it :P&lt;/em&gt;
+&lt;img src=&#34;https://media.discordapp.net/attachments/635625917623828520/1085283400610488442/rice_comp.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;The Rice&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;colors&#34;&gt;Colors&lt;/h2&gt;
+&lt;p&gt;I used &lt;code&gt;pywal&lt;/code&gt; to generate this colorscheme, feel free to do the same.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/dylanaraps/pywal&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;pywal GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Black:   #222F30
+Grey:    #A59D9C
+Red:     #86999B
+Green:   #86A78F
+Yellow:  #8592A5
+Blue:    #87B0AF
+Magenta: #B0A7A9
+Cyan:    #DCBCB6
+White:   #EDE1E0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;fetch-program&#34;&gt;fetch program&lt;/h2&gt;
+&lt;p&gt;Provided is a rust crate called &lt;code&gt;fetch&lt;/code&gt; with a basic template to make a hard-coded fetch program.
+(That&amp;rsquo;s the one I used for the screenshots.)
+The program displays:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+  UserName@HostName
+  Distro  ~ DistroName
+  Shell   ~ ShellName
+  Term    ~ Terminal
+  WM      ~ WindowManager
+  ▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So simply modify the variables in the source file to fit your setup and &lt;code&gt;cargo build --release&lt;/code&gt; to get the binary.
+(Tip: I copied the binary over to &lt;code&gt;./local/bin/&lt;/code&gt;.)&lt;/p&gt;
+&lt;h2 id=&#34;assets&#34;&gt;Assets&lt;/h2&gt;
+&lt;h3 id=&#34;firefox-startpage&#34;&gt;Firefox startpage&lt;/h3&gt;
+&lt;p&gt;eject by Spogelsesmaskinen.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/spogelsemaskine/status/1607752472331689991&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;eject&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://twitter.com/spogelsemaskine&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Spogelsesmankinen Twitter profile&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wallpaper&#34;&gt;Wallpaper&lt;/h3&gt;
+&lt;p&gt;Could not find the original artist for the background but I found this wallhaven post with a pretty high res version saved.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://whvn.cc/yxqj6l&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://whvn.cc/yxqj6l&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;firefox-startpage-1&#34;&gt;firefox startpage&lt;/h2&gt;
+&lt;h3 id=&#34;startpage&#34;&gt;Startpage&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;WARNING:&lt;/strong&gt;&lt;/em&gt; &lt;em&gt;&lt;strong&gt;do not&lt;/strong&gt; apply this without considering the vulnerabilities it opens up.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mozilla.org/en-US/security/advisories/mfsa2019-21/#CVE-2019-11730&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;See this CVE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I copied most of what&amp;rsquo;s in this:
+(I added the lil&amp;rsquo; gif at the side and changed some of the website links.)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/okitavera/vimstart&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/okitavera/vimstart&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In order to have this work you will have to let firefox to be able to view &lt;code&gt;file://&lt;/code&gt; from within a locally hosted html file.
+I&amp;rsquo;m guessing you could get around having to disable these security policies by locally hosting the html but I&amp;rsquo;m not quite there yet&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Provided is a user.js inside &lt;code&gt;.mozilla/firefox/default-release&lt;/code&gt; with the necessary changes to make.
+More specifically, these three lines (as documented in mozillazine):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;user_pref&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capability.policy.policynames&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localfilelinks&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;user_pref&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capability.policy.localfilelinks.sites&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file://&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;user_pref&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;capability.policy.localfilelinks.checkloaduri.enabled&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;allAccess&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://kb.mozillazine.org/Links_to_local_pages_do_not_work&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;mozillazine&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, if you are running the latest version of firefox (hopefully):
+Toggle &lt;code&gt;security.fileuri.strict_origin_policy&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt; in your &lt;code&gt;about:config&lt;/code&gt; page.&lt;/p&gt;
+&lt;h3 id=&#34;other-firefox-css-tweaks&#34;&gt;Other Firefox css tweaks&lt;/h3&gt;
+&lt;p&gt;I copied &lt;code&gt;color_variable_template&lt;/code&gt; and &lt;code&gt;autohide_tabstoolbar&lt;/code&gt; templates from this incredible firefox css website:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mrotherguy.github.io/firefox-csshacks/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://mrotherguy.github.io/firefox-csshacks/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;code&gt;userChrome.css&lt;/code&gt; provided under &lt;code&gt;.mozilla/firefox/default-release/chrome&lt;/code&gt; already has these css patches applied and should be placed inside the &lt;code&gt;chrome&lt;/code&gt; directory that &lt;em&gt;you&lt;/em&gt; have to make inside your firefox local directory.
+Your firefox local directory can be found in &lt;code&gt;about:profiles&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;vim&#34;&gt;Vim&lt;/h2&gt;
+&lt;p&gt;I did not theme much of what&amp;rsquo;s on my vim other than enabling a couple options.
+Most of it (but basically all of it) comes from the amazing team over at AstroNvim .
+Additionally, my nvim version is &lt;code&gt;0.8.0&lt;/code&gt; and was installed through bob-nvim.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/AstroNvim/AstroNvim&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AstroNvim GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://crates.io/crates/bob-nvim&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bob-nvim&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;shell&#34;&gt;shell&lt;/h2&gt;
+&lt;p&gt;As seen in my screenshot I am using nushell.
+A new type of shell that deals with data instead of simple text streams.
+Very interesting and fast out of the box (even on my 2008 hardware).
+&lt;strong&gt;NOTE&lt;/strong&gt; I have a bunch of aliases at the end of my nushell config file that replace most of the gnu coreutils with rust implementations of each.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nushell.sh/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;nushell Website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/uutils/coreutils&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;UUtils GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sway&#34;&gt;Sway&lt;/h2&gt;
+&lt;h3 id=&#34;i-am-not-using-the-upstream-sway&#34;&gt;I am not using the upstream sway.&lt;/h3&gt;
+&lt;p&gt;I am using swayfx.
+A fork of sway that adds corners, shadows and active/inactive dim.
+That means that the options under the swayfx area in my sway config will most definitely give you errors when launching the upstream sway istead of swayfx sway.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/WillPower3309/swayfx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;swayfx GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dvorak&#34;&gt;dvorak&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;IMPORTANT&lt;/strong&gt;&lt;/em&gt;
+My keybinds and input layout in sway are set to a dvorak keyboard.
+So if you are using a normal qwerty keyboard remember to change the layout back to normal in the sway config and possibly change the sway keybinds around in the keymap config.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Link to github repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/laptop-dots-wl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/laptop-dots-wl&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>R. O. N. DataBase Manager</title>
+        <link>http://localhost:1313/cache-invalidation/posts/ron-db/</link>
+        <pubDate>Fri, 31 Mar 2023 13:32:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/ron-db/</guid>
+        <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;strong&gt;rdbm&lt;/strong&gt; is a rust program for getting and setting a custom ron resource file.&lt;/p&gt;
+&lt;p&gt;Similar to &lt;code&gt;.Xresources&lt;/code&gt;, &lt;code&gt;rdbm&lt;/code&gt; will create a &lt;code&gt;resources.ron&lt;/code&gt; in your &lt;code&gt;~/.config/&lt;/code&gt; directory.
+You can then use &lt;code&gt;rdbm&lt;/code&gt; to set multiple &amp;ldquo;key-value&amp;rdquo; pairs similar to &lt;code&gt;.Xresources&lt;/code&gt;.
+In this case &lt;code&gt;rdbm&lt;/code&gt; aims to replace &lt;code&gt;xrdb&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/ron-rs/ron&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ron Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://wikipedia.org/wiki/Xrdb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;xrdb Information&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;documentation&#34;&gt;Documentation&lt;/h1&gt;
+&lt;p&gt;Here is a short preview of each subcommand:&lt;/p&gt;
+&lt;h2 id=&#34;view-current-resource-file&#34;&gt;view current resource file&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm all
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;set-a-key-value-pair&#34;&gt;set a key-value pair&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm set &amp;#34;color0&amp;#34; &amp;#34;#222F30&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;get-a-value&#34;&gt;get a value&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm get &amp;#34;color0&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;rdbm-help-page&#34;&gt;rdbm help page&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rdbm --help
+rdbm help
+rdbm set --help
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;project-goals&#34;&gt;Project Goals&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove entries&lt;/li&gt;
+&lt;li&gt;Get/Set multiple values&lt;/li&gt;
+&lt;li&gt;Custom &lt;code&gt;resource.ron&lt;/code&gt; path&lt;/li&gt;
+&lt;li&gt;Group key-value pairs (similar to having &lt;code&gt;URxvt*color0&lt;/code&gt; and &lt;code&gt;xterm*color0&lt;/code&gt; in .Xresources)&lt;/li&gt;
+&lt;li&gt;Sort entries in resource file&lt;/li&gt;
+&lt;li&gt;Preserve order of entries in resource file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Link to github repo: &lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/rdbm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Sunglas/rdbm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>C&#43;&#43; Modules System w/ clang&#43;&#43;</title>
+        <link>http://localhost:1313/cache-invalidation/posts/cpp-modules/</link>
+        <pubDate>Wed, 18 Jan 2023 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/cpp-modules/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Category Theory</title>
+        <link>http://localhost:1313/cache-invalidation/posts/category-theory/</link>
+        <pubDate>Thu, 12 Jan 2023 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/category-theory/</guid>
+        <description>&lt;p&gt;It has been a great fun reading &amp;ldquo;Category Theory for Programmers&amp;rdquo; by Bartosz
+Milewski and finding great insight into my programming adventures through the
+eyes of a category theory.&lt;/p&gt;
+&lt;h1 id=&#34;challenge-1&#34;&gt;Challenge #1&lt;/h1&gt;
+</description>
+        </item>
+        <item>
+        <title>Mandelbrot Parallelized</title>
+        <link>http://localhost:1313/cache-invalidation/posts/mandelbrot-revamp/</link>
+        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/mandelbrot-revamp/</guid>
+        <description>&lt;img src="http://localhost:1313/cache-invalidation/posts/mandelbrot-revamp/cover.png" alt="Featured image of post Mandelbrot Parallelized" /&gt;&lt;p&gt;As I had mentioned in my past blog about the &lt;a class=&#34;link&#34; href=&#34;mandelbrot.md&#34; &gt;&lt;em&gt;Mandelbrot Research
+Repo&lt;/em&gt;&lt;/a&gt; &amp;ldquo;I&amp;rsquo;ve refactored this piece of code like
+6140275936420759697 times&amp;hellip;&amp;rdquo;, so I guess that makes it &amp;ldquo;6140275936420759697&amp;rdquo;
+plus one.&lt;/p&gt;
+&lt;p&gt;This time around I finalized the implementation for a &lt;code&gt;Canvas&lt;/code&gt; class that
+collects all the pixels you want and writes to a file you give it.
+By making it a class it is now much easier to work on the underlying byte buffer
+without having to get your hands dirty.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;template&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;size_t width, size_t height&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Canvas&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The only downside to this implementation is the fact that this class will get
+allocated on the stack so for any render of 1.5k+ pixels in both dimensions ends
+up overflowing most computer&amp;rsquo;s stacks nowadays.
+The way to get around this is by declaring the canvas object as a &lt;code&gt;static&lt;/code&gt;
+duration object so that it gets stored into storage and not the actual stack.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; canvas &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Canvas&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One cool thing about this implementation is the way you can use lambdas to
+modify the pixels isnide the byte buffer.
+For example, with the new &lt;code&gt;construct(auto op)&lt;/code&gt; method you can simply pass a
+function pointer (though realistically, you would only pass a lambda) and the
+&lt;code&gt;construct&lt;/code&gt; method applies that function to each pixel in the canvas.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; mandelbrot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [](std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;complex&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; coordinate) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; max_iteration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20000ul&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; x_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; y_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0&lt;/span&gt;L;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; iteration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0u&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (std&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;islessequal((x_squared &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; y_squared), &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		       (iteration &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; max_iteration)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fma(&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x, y, coordinate.imag());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x_squared &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; y_squared &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; coordinate.real();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			x_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; x;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			y_squared &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; y;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			iteration&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Color&lt;/span&gt;(iteration);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	canvas.construct(mandelbrot);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This can then be parallelized using &lt;a class=&#34;link&#34; href=&#34;https://openmp.org/specifications/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;OpenMP&lt;/a&gt;
+with a range-based for-loop.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;construct&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;auto&lt;/span&gt; op) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#pragma omp parallel for
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (size_t idx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; idx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; width &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; height; idx&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			pixels[idx] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; op(coordinate(idx));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One final fix that&amp;rsquo;s pending is being able to do histogram coloring.
+This can (probably) be easily implemented by just changing the &lt;code&gt;return Color(iteration)&lt;/code&gt; part at the end of that lambda.
+But I haven&amp;rsquo;t found a convenient way of doing that yet.
+Furthermore, it would be good to support different scaled images.
+The rendered image for this implementation breaks if &lt;code&gt;width != height&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;links&#34;&gt;Links:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Sunglas/mandelbrot/tree/main/c%2B%2B/mandelbrot-gamma&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;mandelbrot gamma implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Big Bold Title</title>
+        <link>http://localhost:1313/cache-invalidation/posts/template/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 -0400</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/posts/template/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Archives</title>
+        <link>http://localhost:1313/cache-invalidation/page/archives/</link>
+        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/page/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Links</title>
+        <link>http://localhost:1313/cache-invalidation/page/links/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/page/links/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Search</title>
+        <link>http://localhost:1313/cache-invalidation/page/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/cache-invalidation/page/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
